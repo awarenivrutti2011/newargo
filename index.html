@@ -1,29 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Breakout Trade Tech</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body { background: linear-gradient(to right, #6a11cb, #2575fc); color: white; text-align:center; padding: 2rem; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nature Stock Market</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to bottom, #d0f0c0, #a0e0ff);
+        color: #333;
+    }
+
+    header {
+        background-color: #2e8b57;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    nav {
+        display: flex;
+        justify-content: center;
+        background-color: #3cb371;
+        padding: 10px 0;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 20px;
+        font-weight: bold;
+        transition: color 0.3s;
+    }
+
+    nav a:hover { color: #ffeb3b; }
+
+    .hero {
+        text-align: center;
+        padding: 50px 20px;
+        background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1350&q=80') no-repeat center/cover;
+        color: white;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    }
+
+    .hero h1 { font-size: 3em; margin-bottom: 20px; }
+    .hero p { font-size: 1.2em; }
+
+    .stocks {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 40px 20px;
+    }
+
+    .stock-card {
+        background: linear-gradient(135deg, #f0fff0, #d0f0c0);
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .stock-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .stock-card h2 {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: #2e8b57;
+    }
+
+    .stock-card p {
+        font-size: 1.2em;
+    }
+
+    .price-up { color: green; font-weight: bold; }
+    .price-down { color: red; font-weight: bold; }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #2e8b57;
+        color: white;
+        margin-top: 40px;
+    }
+
+    footer a { color: #ffeb3b; text-decoration: none; margin: 0 10px; }
+</style>
 </head>
 <body>
-  <h1 class="text-4xl font-bold mb-4">Breakout Trade Tech Website</h1>
-  <p class="mb-6">Colorful, interactive charts and trading insights!</p>
-  <canvas id="stockChart" width="600" height="400" class="mx-auto"></canvas>
-  <script>
-    const ctx = document.getElementById('stockChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Mon','Tue','Wed','Thu','Fri'],
-        datasets: [{ label: 'Stock Price', data: [152,158,149,165,173], borderColor: '#ffcc00', backgroundColor: 'rgba(255,204,0,0.2)', fill: true, tension: 0.4 }]
-      },
-      options: { responsive: true }
-    });
-  </script>
+
+<header>Nature Stock Market</header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Stocks</a>
+    <a href="#">Portfolio</a>
+    <a href="#">Contact</a>
+</nav>
+
+<section class="hero">
+    <h1>Invest with Nature</h1>
+    <p>Track the stock market with a refreshing, natural view.</p>
+</section>
+
+<section class="stocks" id="stocks">
+    <div class="stock-card">
+        <h2>Apple (AAPL)</h2>
+        <p class="price">$0.00</p>
+    </div>
+    <div class="stock-card">
+        <h2>Google (GOOGL)</h2>
+        <p class="price">$0.00</p>
+    </div>
+    <div class="stock-card">
+        <h2>Amazon (AMZN)</h2>
+        <p class="price">$0.00</p>
+    </div>
+    <div class="stock-card">
+        <h2>Tesla (TSLA)</h2>
+        <p class="price">$0.00</p>
+    </div>
+</section>
+
+<footer>
+    &copy; 2025 Nature Stock Market.  
+    <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Contact</a>
+</footer>
+
+<script>
+    // Simulate dynamic stock prices
+    function updateStockPrices() {
+        const stocks = document.querySelectorAll('.stock-card');
+        stocks.forEach(card => {
+            let price = (Math.random() * 5000).toFixed(2); // Random price
+            let change = Math.random() > 0.5 ? 1 : -1;
+            let pTag = card.querySelector('.price');
+            pTag.textContent = `$${price}`;
+            pTag.className = change > 0 ? 'price price-up' : 'price price-down';
+        });
+    }
+
+    updateStockPrices();
+    setInterval(updateStockPrices, 5000); // Update every 5 seconds
+</script>
+
 </body>
 </html>
